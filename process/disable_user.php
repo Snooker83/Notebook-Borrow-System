@@ -1,0 +1,41 @@
+<?php
+
+require_once "../config/config.php";
+require_once "../config/database.php";
+
+// ตรวจสอบ Admin Login
+if (
+    !isset($_SESSION['admin_login']) ||
+    $_SESSION['admin_login'] !== true
+) {
+    header("Location: ../admin/login.php");
+    exit;
+}
+
+$id = $_GET['id'] ?? null;
+
+if (!$id) {
+    $_SESSION['error'] = "Invalid User ID.";
+    header("Location: ../admin/users.php");
+    exit;
+}
+
+// ป้องกันไม่ให้ Admin ปิดบัญชีตัวเอง
+if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == $id) {
+    $_SESSION['error'] = "You cannot disable your own account.";
+    header("Location: ../admin/users.php");
+    exit;
+}
+
+$stmt = $conn->prepare("
+UPDATE users
+SET status = 'disabled'
+WHERE id = ?
+");
+
+$stmt->execute([$id]);
+
+$_SESSION['success'] = "User disabled successfully.";
+
+header("Location: ../admin/users.php");
+exit;

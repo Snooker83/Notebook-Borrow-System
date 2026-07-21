@@ -1,0 +1,13 @@
+/vendor/
+/node_modules/
+
+.env
+
+Thumbs.db
+.DS_Store
+
+*.log
+
+# หากมีข้อมูลจริงในไฟล์เหล่านี้
+config/mail.php
+config/database.php

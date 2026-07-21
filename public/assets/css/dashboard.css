@@ -1,0 +1,327 @@
+/* ==========================================
+   Dashboard Layout
+========================================== */
+
+.dashboard-wrapper{
+    padding:32px;
+    animation:fadeUp .45s ease;
+}
+
+.dashboard-container{
+    max-width:1400px;
+    margin:auto;
+}
+
+/* ==========================================
+   Header
+========================================== */
+
+.dashboard-header{
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--primary-dark)
+    );
+    color:#fff;
+    border-radius:24px;
+    padding:40px;
+    margin-bottom:30px;
+    box-shadow:var(--shadow-lg);
+    position:relative;
+    overflow:hidden;
+}
+
+.dashboard-header::before{
+    content:"";
+    position:absolute;
+    width:260px;
+    height:260px;
+    border-radius:50%;
+    background:rgba(255,255,255,.08);
+    top:-120px;
+    right:-80px;
+}
+
+.dashboard-header h2{
+    color:#fff;
+    font-size:2rem;
+    margin-bottom:8px;
+}
+
+.dashboard-header p{
+    color:rgba(255,255,255,.85);
+    margin:0;
+}
+
+/* ==========================================
+   Statistics
+========================================== */
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(2,2fr);
+    gap:5px;
+    margin-bottom:5px;
+}
+
+.stat-card{
+    background:#fff;
+    border-radius:20px;
+    padding:10px;
+    box-shadow:var(--shadow);
+    transition:.25s;
+    position:relative;
+    overflow:hidden;
+}
+
+.stat-card:hover{
+    transform:translateY(-6px);
+    box-shadow:var(--shadow-lg);
+}
+
+.stat-icon{
+    width:40px;
+    height:40px;
+    border-radius:16px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:px;
+    background:var(--primary-light);
+    color:var(--primary);
+}
+
+.stat-title{
+    color:#888;
+    font-size:.8rem;
+}
+
+.stat-value{
+    font-size:2rem;
+    font-weight:700;
+    color:var(--text);
+}
+
+/* ==========================================
+   Content Grid
+========================================== */
+
+.content-grid{
+
+    display:grid;
+
+    grid-template-columns:320px 1fr;
+
+    gap:24px;
+
+    align-items:start;
+
+}
+/* ==========================================
+   Cards
+========================================== */
+
+.dashboard-card{
+    background:#fff;
+    border-radius:20px;
+    padding:28px;
+    box-shadow:var(--shadow);
+    margin-bottom:25px;
+}
+
+.dashboard-card h4{
+    margin-bottom:20px;
+}
+
+/* ==========================================
+   Quick Action
+========================================== */
+
+.quick-actions{
+    display:grid;
+    gap:15px;
+}
+
+.quick-btn{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    background:#F8F9FF;
+    padding:16px 18px;
+    border-radius:14px;
+    text-decoration:none;
+    color:var(--text);
+    transition:.25s;
+}
+
+.quick-btn:hover{
+    background:var(--primary);
+    color:#fff;
+    transform:translateX(5px);
+}
+
+/* ==========================================
+   Profile
+========================================== */
+
+.profile-card{
+    text-align:center;
+}
+
+.avatar-circle{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--primary-dark)
+    );
+    color:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:34px;
+    font-weight:bold;
+    margin:0 auto 20px;
+}
+
+.profile-name{
+    font-size:1.2rem;
+    font-weight:700;
+}
+
+.profile-email{
+    color:#777;
+    font-size:.95rem;
+}
+
+/* ==========================================
+   Recent Borrow
+========================================== */
+
+.borrow-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 0;
+    border-bottom:1px solid #EEE;
+}
+
+.borrow-item:last-child{
+    border-bottom:none;
+}
+
+.borrow-title{
+    font-weight:600;
+}
+
+.borrow-date{
+    color:#888;
+    font-size:.9rem;
+}
+
+/* ==========================================
+   Empty State
+========================================== */
+
+.empty-state{
+    text-align:center;
+    padding:60px 20px;
+    color:#888;
+}
+
+.empty-state i{
+    font-size:60px;
+    color:var(--primary);
+    margin-bottom:20px;
+}
+
+/* ==========================================
+   Responsive
+========================================== */
+
+@media(max-width:1200px){
+
+    .stats-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .content-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:992px){
+
+    .content-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .dashboard-sidebar{
+
+        position:static;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .dashboard-wrapper{
+        padding:20px;
+    }
+
+    .stats-grid{
+        grid-template-columns:1fr;
+    }
+
+    .dashboard-header{
+        padding:28px;
+    }
+
+    .dashboard-header h2{
+        font-size:1.6rem;
+    }
+
+}
+
+.dashboard-sidebar{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+    position:sticky;
+
+    top:20px;
+
+}
+
+/* ==========================================
+Sticky Sidebar
+========================================== */
+
+.dashboard-sidebar{
+
+    position:sticky;
+
+    top:20px;
+
+    height:fit-content;
+
+}
+
+
+.dashboard-main{
+
+    display:flex;
+
+    flex-direction:column;
+
+}

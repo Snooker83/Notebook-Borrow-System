@@ -1,0 +1,31 @@
+body{
+
+    font-family:'Segoe UI',sans-serif;
+
+    background:#f8f9fa;
+
+}
+
+.card{
+
+    border:none;
+
+    border-radius:15px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+.btn-primary{
+
+    background:#6F42C1;
+
+    border:none;
+
+}
+
+.btn-primary:hover{
+
+    background:#5d35a8;
+
+}

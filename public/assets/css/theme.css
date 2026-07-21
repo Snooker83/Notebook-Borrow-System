@@ -1,0 +1,622 @@
+/* =========================================================
+   Notebook Borrow System (NBS)
+   Modern Purple Theme
+   Version : 1.0
+========================================================= */
+
+/* ===============================
+   Google Font
+================================= */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* ===============================
+   CSS Variables
+================================= */
+:root{
+
+    --primary:#6C5CE7;
+    --primary-dark:#5649C9;
+    --primary-light:#F3F0FF;
+
+    --secondary:#8B80F9;
+
+    --success:#22C55E;
+    --warning:#F59E0B;
+    --danger:#EF4444;
+    --info:#3B82F6;
+
+    --bg:#F6F7FB;
+    --surface:#FFFFFF;
+
+    --text:#2D2D44;
+    --text-light:#6B7280;
+
+    --border:#E5E7EB;
+
+    --shadow-sm:0 4px 12px rgba(0,0,0,.06);
+    --shadow:0 10px 30px rgba(0,0,0,.08);
+    --shadow-lg:0 20px 50px rgba(0,0,0,.12);
+
+    --radius:18px;
+    --radius-sm:12px;
+
+    --transition:.25s ease;
+
+}
+
+/* ===============================
+   Reset
+================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:
+        "Poppins",
+        "Noto Sans Thai",
+        sans-serif;
+
+    background:
+        radial-gradient(circle at top left,
+        rgba(108,92,231,.12),
+        transparent 30%),
+
+        radial-gradient(circle at bottom right,
+        rgba(108,92,231,.08),
+        transparent 25%),
+
+        var(--bg);
+
+    color:var(--text);
+
+    min-height:100vh;
+
+}
+
+/* ===============================
+   Typography
+================================= */
+
+h1,h2,h3,h4,h5,h6{
+
+    font-weight:700;
+    color:var(--text);
+
+}
+
+p{
+
+    color:var(--text-light);
+    line-height:1.7;
+
+}
+
+a{
+
+    color:var(--primary);
+    text-decoration:none;
+    transition:var(--transition);
+
+}
+
+a:hover{
+
+    color:var(--primary-dark);
+
+}
+
+/* ===============================
+   Card
+================================= */
+
+.card{
+
+    border:none;
+    border-radius:var(--radius);
+
+    box-shadow:var(--shadow);
+
+    transition:var(--transition);
+
+    background:var(--surface);
+
+}
+
+.card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:var(--shadow-lg);
+
+}
+
+/* ===============================
+   Buttons
+================================= */
+
+.btn{
+
+    border-radius:12px;
+
+    transition:var(--transition);
+
+    font-weight:600;
+
+}
+
+.btn-primary{
+
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--primary-dark)
+    );
+
+    border:none;
+
+}
+
+.btn-primary:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 10px 25px rgba(108,92,231,.35);
+
+}
+
+.btn-secondary{
+
+    border:none;
+
+    background:#6B7280;
+
+}
+
+.btn-success{
+
+    border:none;
+
+}
+
+.btn-danger{
+
+    border:none;
+
+}
+
+/* ===============================
+   Form
+================================= */
+
+.form-label{
+
+    font-weight:600;
+
+    color:var(--text);
+
+}
+
+.form-control,
+.form-select{
+
+    border-radius:12px;
+
+    border:1px solid var(--border);
+
+    min-height:48px;
+
+    transition:var(--transition);
+
+}
+
+.form-control:focus,
+.form-select:focus{
+
+    border-color:var(--primary);
+
+    box-shadow:
+
+        0 0 0 .2rem
+        rgba(108,92,231,.15);
+
+}
+
+/* ===============================
+   Navbar
+================================= */
+
+.navbar{
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--primary-dark)
+        );
+
+    box-shadow:var(--shadow);
+
+}
+
+/* ===============================
+   Badge
+================================= */
+
+.badge{
+
+    border-radius:30px;
+
+    padding:8px 14px;
+
+    font-weight:600;
+
+}
+
+/* ===============================
+   Table
+================================= */
+
+.table{
+
+    background:#FFF;
+
+    border-radius:var(--radius);
+
+    overflow:hidden;
+
+}
+
+.table thead{
+
+    background:var(--primary);
+
+    color:#FFF;
+
+}
+
+.table-hover tbody tr:hover{
+
+    background:var(--primary-light);
+
+}
+
+/* ===============================
+   Notebook Card
+================================= */
+
+.notebook-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+
+    gap:18px;
+
+}
+
+.notebook-card{
+
+    border-radius:16px;
+
+    overflow:hidden;
+
+    transition:.25s;
+
+}
+
+.notebook-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 18px 40px rgba(0,0,0,.15);
+
+}
+
+.notebook-card img{
+
+    width:100%;
+
+    height:110px;
+
+    object-fit:cover;
+
+}
+
+.notebook-card .card-body{
+
+    padding:14px;
+
+}
+
+.notebook-card h5{
+
+    font-size:15px;
+
+    margin-bottom:8px;
+
+}
+
+.notebook-card p{
+
+    font-size:13px;
+
+    margin-bottom:8px;
+
+}
+
+.notebook-card .btn{
+
+    font-size:13px;
+
+    padding:8px;
+
+}
+
+.notebook-image{
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:12px;
+
+}
+
+.notebook-image img{
+
+    width:100%;
+    height:170px;
+    object-fit:cover;
+
+    transition:.3s;
+
+}
+
+.notebook-image.disabled img{
+
+    filter:grayscale(100%) brightness(.45);
+
+}
+
+/* Disabled Card */
+.notebook-card.disabled:hover{
+
+    transform:none;
+
+    cursor:not-allowed;
+
+}
+
+.notebook-card.disabled img{
+
+    filter:grayscale(100%)
+           brightness(.55)
+           blur(1px);
+
+}
+
+/* Overlay */
+
+.notebook-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(0,0,0,.25);
+
+    color:#FFF;
+
+    opacity:0;
+
+    transition:.3s;
+
+}
+
+.notebook-card.disabled .notebook-overlay{
+
+    opacity:1;
+
+}
+
+/* Lock Icon */
+
+.notebook-overlay i{
+
+    font-size:52px;
+
+    color:#FFF;
+
+    text-shadow:0 0 12px rgba(0,0,0,.5);
+
+}
+
+/* Status */
+
+.notebook-overlay span{
+
+    margin-top:10px;
+
+    font-weight:700;
+
+    font-size:18px;
+}
+
+/* ===============================
+   Animation
+================================= */
+
+.fade-up{
+
+    animation:fadeUp .5s ease;
+
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ===============================
+   Scrollbar
+================================= */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#EEE;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:var(--primary);
+
+    border-radius:20px;
+
+}
+
+/* ===============================
+   Responsive
+================================= */
+
+@media(max-width:992px){
+
+    .card{
+
+        margin-bottom:20px;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    body{
+
+        font-size:15px;
+
+    }
+
+    .btn{
+
+        width:100%;
+
+    }
+
+    .table{
+
+        font-size:14px;
+
+    }
+
+}
+
+
+.swal2-confirm{
+
+    background:#6C5CE7 !important;
+
+    border-radius:10px !important;
+
+    padding:10px 24px !important;
+
+}
+
+.swal2-popup{
+
+    border-radius:18px !important;
+
+}
+
+.swal2-title{
+
+    font-weight:700 !important;
+
+}
+
+.swal2-loader{
+
+    border-color:#6C5CE7 transparent #6C5CE7 transparent !important;
+
+}
+
+
+.swal2-confirm{
+
+    min-width:120px;
+
+}
+
+.swal2-cancel{
+
+    min-width:120px;
+
+}
+
+.swal2-actions{
+
+    gap:12px;
+
+}
+
+.lock-icon{
+    width:72px;
+    height:72px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background:rgba(255,255,255,.18);
+    backdrop-filter:blur(8px);
+    font-size:34px;
+    color:#FFF;
+}
+
+.grayscale{
+
+    filter: grayscale(100%);
+
+    opacity:.65;
+
+    transition:.3s;
+
+}

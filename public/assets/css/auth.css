@@ -1,0 +1,438 @@
+/* ==========================================
+   Authentication Layout
+========================================== */
+
+.auth-wrapper{
+    min-height:100vh;
+    display:flex;
+    background:transparent;
+}
+
+/* ==========================================
+   Left Panel
+========================================== */
+
+.auth-left{
+
+    width:40%;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--primary-dark)
+        );
+
+    color:#FFF;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:60px;
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.auth-left::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:380px;
+
+    height:380px;
+
+    border-radius:50%;
+
+    background:
+        rgba(255,255,255,.08);
+
+    top:-120px;
+
+    left:-120px;
+
+}
+
+.auth-left::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:300px;
+
+    height:300px;
+
+    border-radius:50%;
+
+    background:
+        rgba(255,255,255,.06);
+
+    bottom:-80px;
+
+    right:-80px;
+
+}
+
+.brand{
+
+    text-align:center;
+
+    z-index:2;
+
+}
+
+.brand-logo{
+
+    width:140px;
+
+    margin-bottom:25px;
+
+}
+
+.brand h1{
+
+    color:#FFF;
+
+    font-size:36px;
+
+    font-weight:700;
+
+}
+
+.brand p{
+
+    color:#F4F4F4;
+
+    margin-top:15px;
+
+    line-height:1.8;
+
+}
+
+.brand-footer{
+
+    margin-top:40px;
+
+    font-size:15px;
+
+    opacity:.9;
+
+    text-align:center;
+
+    z-index:2;
+
+}
+
+/* ==========================================
+   Right Panel
+========================================== */
+
+.auth-right{
+
+    flex:1;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:40px;
+
+}
+
+/* ==========================================
+   Login Card
+========================================== */
+
+.login-card{
+
+    width:100%;
+
+    max-width:460px;
+
+    background:#FFF;
+
+    border-radius:24px;
+
+    padding:45px;
+
+    box-shadow:
+        0 25px 60px rgba(0,0,0,.10);
+
+    animation:fadeUp .5s;
+
+}
+
+.login-card h2{
+
+    margin-bottom:8px;
+
+    font-size:30px;
+
+}
+
+.login-card p{
+
+    margin-bottom:30px;
+
+}
+
+/* ==========================================
+   Form
+========================================== */
+
+
+.btn-login{
+
+    width:100%;
+
+    height:50px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--primary-dark)
+        );
+
+    color:#FFF;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.btn-login:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 12px 25px
+        rgba(108,92,231,.30);
+
+}
+
+.register-link{
+
+    text-align:center;
+
+    margin-top:25px;
+
+}
+
+.register-link a{
+
+    font-weight:600;
+
+}
+
+/* ==========================================
+   Responsive
+========================================== */
+
+@media(max-width:992px){
+
+    .auth-wrapper{
+
+        flex-direction:column;
+
+    }
+
+    .auth-left{
+
+        width:100%;
+
+        padding:50px 30px;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .auth-right{
+
+        padding:25px;
+
+    }
+
+    .login-card{
+
+        padding:30px;
+
+    }
+
+    .brand-logo{
+
+        width:90px;
+
+    }
+
+    .brand h1{
+
+        font-size:28px;
+
+    }
+
+}
+
+.input-group{
+
+    display:flex;
+
+    align-items:stretch;
+
+}
+
+.input-group .form-control{
+
+    margin:0;
+
+    height:56px;
+
+    min-height:56px;
+
+}
+
+.input-group-text{
+
+    margin:0;
+
+    height:56px;
+
+    min-height:56px;
+
+    padding:0 20px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    white-space:nowrap;
+
+}
+
+/* ==========================================
+   Login Card
+========================================== */
+
+.register-card{
+
+    width:100%;
+
+    /* max-width:460px; */
+
+    background:#FFF;
+
+    border-radius:24px;
+
+    padding:45px;
+
+    box-shadow:
+        0 25px 60px rgba(0,0,0,.10);
+
+    animation:fadeUp .5s;
+
+}
+
+.register-card h2{
+
+    margin-bottom:8px;
+
+    font-size:30px;
+
+}
+
+.register-card p{
+
+    margin-bottom:30px;
+
+}
+
+.otp-group{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:10px;
+
+    margin:35px 0;
+
+}
+
+.otp-input{
+
+    width:55px;
+
+    height:60px;
+
+    text-align:center;
+
+    font-size:24px;
+
+    border-radius:12px;
+
+    border:1px solid #DDD;
+
+}
+
+#countdown{
+
+    font-size:18px;
+
+    font-weight:700;
+
+}
+
+#resendBtn{
+
+    border-radius:12px;
+
+    padding:10px 22px;
+
+}
+
+/* ==========================================
+Forgot Password
+========================================== */
+
+.forgot-link{
+
+    font-size:.92rem;
+
+    font-weight:600;
+
+    color:var(--primary);
+
+    text-decoration:none;
+
+    transition:.25s;
+
+}
+
+.forgot-link:hover{
+
+    color:var(--primary-dark);
+
+    text-decoration:underline;
+
+}

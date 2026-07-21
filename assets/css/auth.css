@@ -1,0 +1,122 @@
+/* ==========================================
+   Notebook Borrow System
+   Authentication Style
+========================================== */
+
+:root{
+    --primary:#6F42C1;
+    --primary-dark:#5A32A3;
+    --background:#F4F6F9;
+    --border:#E5E7EB;
+    --text:#212529;
+    --muted:#6C757D;
+}
+
+body{
+    background:var(--background);
+    font-family:"Segoe UI",Tahoma,Geneva,Verdana,sans-serif;
+}
+
+.card{
+    border:none;
+    border-radius:18px;
+}
+
+.card-body{
+    padding:40px;
+}
+
+.text-purple{
+    color:var(--primary);
+}
+
+.form-label{
+    font-weight:600;
+    color:var(--text);
+}
+
+.form-control{
+    height:48px;
+    border-radius:10px;
+    border:1px solid var(--border);
+}
+
+.form-control:focus{
+    border-color:var(--primary);
+    box-shadow:0 0 0 .2rem rgba(111,66,193,.15);
+}
+
+.input-group-text{
+    background:#EFE9FF;
+    color:var(--primary);
+    font-weight:600;
+    border:1px solid var(--border);
+}
+
+.btn-primary{
+    background:var(--primary);
+    border:none;
+    border-radius:10px;
+    height:50px;
+    font-size:17px;
+    font-weight:600;
+}
+
+.btn-primary:hover{
+    background:var(--primary-dark);
+}
+
+.terms-box{
+    background:#FAFAFA;
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:20px;
+    height:100%;
+    overflow-y:auto;
+    max-height:560px;
+}
+
+.terms-box ol{
+    padding-left:20px;
+}
+
+.terms-box li{
+    margin-bottom:10px;
+    color:#555;
+    font-size:14px;
+    line-height:1.6;
+}
+
+small{
+    font-size:12px;
+}
+
+#emailMessage,
+#studentMessage,
+#passwordMessage{
+    display:block;
+    margin-top:5px;
+    font-size:13px;
+    font-weight:500;
+}
+
+.valid{
+    color:#198754;
+}
+
+.invalid{
+    color:#DC3545;
+}
+
+@media (max-width:768px){
+
+    .card-body{
+        padding:25px;
+    }
+
+    .terms-box{
+        margin-top:25px;
+        max-height:none;
+    }
+
+}

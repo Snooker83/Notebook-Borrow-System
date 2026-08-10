@@ -1,6 +1,6 @@
 <?php
 
-require_once "../config/config.php";
+require_once __DIR__ . "/../config/config.php";
 
 if (
     !isset($_SESSION['reset_password_user_id'])
@@ -26,7 +26,7 @@ if (
         Login | Notebook Borrow System
     </title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" >
 
     <link rel="stylesheet" href="assets/css/theme.css">
 
@@ -78,7 +78,7 @@ if (
 
                 <form
                     id="resetForm"
-                    action="../process/reset_password_process.php"
+                    action="process/reset_password_process.php"
                     method="POST">
 
                     <div class="mb-3">

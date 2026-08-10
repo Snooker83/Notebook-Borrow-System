@@ -325,3 +325,70 @@ Sticky Sidebar
     flex-direction:column;
 
 }
+
+/* ==========================================
+Badge-Number
+========================================== */
+
+.image-container {
+    position: relative;
+    display: inline-block;
+    width: 300px;
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+}
+
+.badge-number {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    transform: translate(-50%, -50%);
+    background-color: rgba(215, 173, 255, 0.8);
+    color: rgb(82, 81, 81);
+    padding: 10px 10px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* ==========================================
+Status-badge
+========================================== */
+.status-badge {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    padding: 5px 5px;
+    font-size: 12px;
+    border-radius: 10px;
+}
+
+.status-badge.available {
+    background-color: #e6f4ea;
+    color: #137333;          
+    border: 1px solid #ceead6; 
+}
+
+
+.status-badge.available::before {
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background-color: #137333; /* สีของจุด */
+    border-radius: 50%;       /* ทำให้เป็นวงกลม */
+}

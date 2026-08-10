@@ -1,6 +1,6 @@
 <?php
 
-require_once "../config/config.php";
+require_once __DIR__ . "/../config/config.php";
 
 ?>
 
@@ -17,7 +17,7 @@ require_once "../config/config.php";
         Forgot Password | Notebook Borrow System
     </title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" >
 
     <link rel="stylesheet" href="assets/css/theme.css">
 
@@ -69,7 +69,7 @@ require_once "../config/config.php";
 
                 <form
                     id="forgotForm"
-                    action="../process/forgot_password_process.php"
+                    action="process/forgot_password_process.php"
                     method="POST">
 
                     <label class="form-label">
@@ -128,7 +128,7 @@ require_once "../config/config.php";
 
                 Remember your password?
 
-                <a href="login.php">
+                <a href="<?= BASE_URL ?>/login.php">
 
                     Back to Login
 

@@ -1,6 +1,6 @@
 <?php
 
-require_once "../config/config.php";
+require_once __DIR__ . "/../config/config.php";
 
 
 // ตรวจสอบว่ามี user_id ใน session หรือไม่
@@ -27,22 +27,17 @@ if (!isset($_SESSION['reset_user_id'])) {
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
     <title>
         Verify OTP | Notebook Borrow System
     </title>
-
 
     <link rel="stylesheet" href="assets/css/theme.css">
 
     <link rel="stylesheet" href="assets/css/auth.css">
 
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 </head>
-
 
 <body>
 
@@ -114,7 +109,7 @@ if (!isset($_SESSION['reset_user_id'])) {
 
 
                 <form
-                    action="../process/verify_reset_process.php"
+                    action="process/verify_reset_process.php"
                     method="POST">
 
 
@@ -185,7 +180,7 @@ if (!isset($_SESSION['reset_user_id'])) {
 
                     </div>
                     <br>
-                    <a href="login.php">
+                    <a href="<?= BASE_URL ?>/login.php">
 
                         Back to Login
 
@@ -281,7 +276,7 @@ if (!isset($_SESSION['reset_user_id'])) {
                         <div class="mt-3">
 
 
-                            <a href="login.php">
+                            <a href="<?= BASE_URL ?>/login.php">
 
                                 Back to Login
 

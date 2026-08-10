@@ -1,0 +1,15 @@
+.git
+.gitignore
+
+README.md
+
+node_modules
+
+docker-compose.override.yml
+
+.env
+
+config/database.php
+config/mail.php
+
+Thumbs.db

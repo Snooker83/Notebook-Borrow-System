@@ -1,0 +1,73 @@
+version: "3.9"
+
+services:
+
+  app:
+    build: .
+    container_name: notebook_app
+    restart: unless-stopped
+
+    ports:
+      - "8080:80"
+
+    volumes:
+      - ./:/var/www/html
+
+    env_file:
+      - .env
+
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+    networks:
+      - notebook_network
+
+  mysql:
+    image: mysql:8.0
+    container_name: notebook_mysql
+    restart: unless-stopped
+
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASS}
+      MYSQL_DATABASE: ${DB_NAME}
+
+    ports:
+      - "3308:3306"
+
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./db:/docker-entrypoint-initdb.d
+
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+    networks:
+      - notebook_network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: notebook_phpmyadmin
+    restart: unless-stopped
+
+    depends_on:
+      - mysql
+
+    ports:
+      - "8081:80"
+
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+
+    networks:
+      - notebook_network
+
+networks:
+  notebook_network:
+
+volumes:
+  mysql_data:

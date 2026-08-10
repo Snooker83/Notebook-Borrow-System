@@ -167,7 +167,7 @@ function updateCard(nb){
             action.innerHTML=`
 
 <form
-action="../process/request_borrow.php"
+action="../../process/request_borrow.php"
 method="POST">
 
 <input
@@ -204,7 +204,7 @@ Pending Approval
 
 <a
 
-href="../process/cancel_request.php?notebook_id=${nb.id}"
+href="../../process/cancel_request.php?notebook_id=${nb.id}"
 
 class="btn btn-outline-danger"
 

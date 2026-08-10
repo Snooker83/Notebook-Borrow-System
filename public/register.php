@@ -1,5 +1,7 @@
 <?php
-require_once '../config/config.php';
+
+require_once __DIR__ . "/../config/config.php";
+
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +15,7 @@ require_once '../config/config.php';
 
     <title>Register | <?= APP_NAME ?></title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" >
 
     <link rel="stylesheet" href="assets/css/theme.css">
 
@@ -78,7 +80,7 @@ require_once '../config/config.php';
 
                 <form
                     id="registerForm"
-                    action="../process/register_process.php"
+                    action="process/register_process.php"
                     method="POST">
 
                     <div class="row">
@@ -353,15 +355,6 @@ require_once '../config/config.php';
         </div>
 
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <script src="../assets/js/register.js"></script>
-
-    <script src="assets/js/alert.js"></script>
-
-    <script src="assets/js/loading.js"></script>
-
     <script>
         function togglePassword(inputId, buttonId) {
 
@@ -403,6 +396,14 @@ require_once '../config/config.php';
 
             });
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="assets/js/alert.js"></script>
+
+    <script src="assets/js/loading.js"></script>
+
+    <script src="assets/js/register.js"></script>
 
 </body>
 

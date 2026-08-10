@@ -1,7 +1,7 @@
 <?php
 
-require_once "../config/config.php";
-require_once "../config/database.php";
+require_once __DIR__ . "/../config/config.php";
+require_once __DIR__ . "/../config/database.php";
 
 // ==========================================
 // Session Protection
@@ -467,7 +467,13 @@ Right Content
 
 <div class="notebook-grid">
 
-<?php foreach($notebooks as $nb): ?>
+<?php 
+
+$badgeim = 01;
+
+foreach($notebooks as $nb): 
+
+?>
 
 <?php
 
@@ -521,14 +527,18 @@ id="card-<?= $nb['id'] ?>">
     id="image-<?= $nb['id'] ?>">
 
         <?php if(!empty($nb['image'])): ?>
+        
+       <div class="badge-number"><?php echo $badgeim; $badgeim++; ?></div>
 
         <img
 
-        src="../uploads/notebook/<?= htmlspecialchars($nb['image']) ?>"
+        src="uploads/notebook/<?= htmlspecialchars($nb['image']) ?>"
 
         alt="<?= htmlspecialchars($nb['name']) ?>"
 
-        id="image-img-<?= $nb['id'] ?>">
+        id="image-img-<?= $nb['id'] ?>"  > 
+
+        
 
         <?php else: ?>
 
@@ -537,6 +547,7 @@ id="card-<?= $nb['id'] ?>">
         src="https://via.placeholder.com/300x180?text=Notebook"
 
         id="image-img-<?= $nb['id'] ?>">
+
 
         <?php endif; ?>
 
@@ -646,7 +657,7 @@ id="card-<?= $nb['id'] ?>">
 
                 <a
 
-                href="../process/cancel_request.php?notebook_id=<?= $nb['id'] ?>"
+                href="process/cancel_request.php?notebook_id=<?= $nb['id'] ?>"
 
                 class="btn btn-outline-danger"
 
@@ -748,7 +759,7 @@ id="card-<?= $nb['id'] ?>">
 
             <form
 
-            action="../process/request_borrow.php"
+            action="process/request_borrow.php"
 
             method="POST">
 

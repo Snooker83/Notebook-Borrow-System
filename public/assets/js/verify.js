@@ -124,7 +124,7 @@ startCountdown();
 // ==========================================
 
 resendBtn.addEventListener("click", function () {
-  fetch("../process/resend_otp.php", {
+  fetch("../../process/resend_otp.php", {
     method: "POST",
   })
     .then(async (response) => {

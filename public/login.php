@@ -1,6 +1,6 @@
 <?php
 
-require_once "../config/config.php";
+require_once __DIR__ . "/../config/config.php";
 
 ?>
 
@@ -17,7 +17,7 @@ require_once "../config/config.php";
         Login | Notebook Borrow System
     </title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" >
 
     <link rel="stylesheet" href="assets/css/theme.css">
 
@@ -44,15 +44,13 @@ require_once "../config/config.php";
 
                 <p>
                     Faculty of Engineering<br>
-                    Chiang Mai University
-                </p>
+                    Chiang Mai University 
 
             </div>
 
             <div class="brand-footer">
 
-                Borrow notebooks securely<br>
-                and efficiently.
+                Borrow notebooks securely and efficiently.
 
             </div>
 
@@ -67,7 +65,7 @@ require_once "../config/config.php";
 
                 <p>Sign in to continue</p>
 
-                <form id="loginForm" action="../process/login_process.php" method="POST">
+                <form id="loginForm" action="process/login_process.php" method="POST">
 
                     <label class="form-label">
                         <i class="bi bi-envelope-fill me-2"></i>

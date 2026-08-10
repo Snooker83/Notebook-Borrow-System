@@ -37,3 +37,11 @@ config/mail.php
 4.
 
 Edit your database and SMTP credentials.
+
+# Notebook Borrow System
+
+Docker Ready Version
+
+## Run
+
+docker compose up -d --build

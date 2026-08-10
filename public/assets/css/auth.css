@@ -436,3 +436,15 @@ Forgot Password
     text-decoration:underline;
 
 }
+
+/* ==========================================
+Error Message
+========================================== */
+
+.invalid {
+  color: #c91818;
+}
+
+.valid {
+  color: #0ea522;
+}

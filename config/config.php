@@ -1,28 +1,25 @@
 <?php
 
-/**
- * --------------------------------------------------------
- * Notebook Borrow System
- * Chiang Mai University
- * Global Configuration
- * --------------------------------------------------------
- */
-
 date_default_timezone_set('Asia/Bangkok');
 
 session_start();
 
+require_once __DIR__ . '/../vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
+$dotenv->safeLoad();
+
 /*
 |--------------------------------------------------------------------------
-| Project Information
+| Project
 |--------------------------------------------------------------------------
 */
 
-define('APP_NAME', 'Notebook Borrow System');
+define('APP_NAME', $_ENV['APP_NAME'] ?? 'Notebook Borrow System');
 
-define('APP_VERSION', '1.0.0');
+define('APP_VERSION', '2.0.0');
 
-define('BASE_URL', 'http://localhost/NotebookBorrowSystem/public');
+define('BASE_URL', $_ENV['BASE_URL'] ?? 'http://localhost:8080');
 
 /*
 |--------------------------------------------------------------------------
@@ -38,9 +35,9 @@ define('PASSWORD_ALGO', PASSWORD_DEFAULT);
 |--------------------------------------------------------------------------
 */
 
-define('OTP_LENGTH', 6);
+define('OTP_LENGTH', (int)($_ENV['OTP_LENGTH'] ?? 6));
 
-define('OTP_EXPIRE_MINUTES', 5);
+define('OTP_EXPIRE_MINUTES', (int)($_ENV['OTP_EXPIRE_MINUTES'] ?? 5));
 
 /*
 |--------------------------------------------------------------------------
@@ -48,4 +45,7 @@ define('OTP_EXPIRE_MINUTES', 5);
 |--------------------------------------------------------------------------
 */
 
-define('UPLOAD_PATH', dirname(__DIR__) . '/uploads/notebook/');
+define(
+    'UPLOAD_PATH',
+    dirname(__DIR__) . '/public/uploads/notebook/'
+);

@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // =====================================
 
   function checkEmail(value) {
-    fetch("../../process/check_email.php", {
+    fetch("/notebookborrow/process/check_email.php", {
       method: "POST",
 
       headers: {
@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // =====================================
 
   function checkStudentID(value) {
-    fetch("../../process/check_student.php", {
+    fetch("/notebookborrow/process/check_student.php", {
       method: "POST",
 
       headers: {

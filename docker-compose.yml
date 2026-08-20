@@ -8,7 +8,7 @@ services:
     restart: unless-stopped
 
     ports:
-      - "8080:80"
+      - "127.0.0.1:8008:80"
 
     volumes:
       - ./:/var/www/html
@@ -31,13 +31,9 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASS}
       MYSQL_DATABASE: ${DB_NAME}
-
-    ports:
-      - "3308:3306"
-
-    volumes:
-      - mysql_data:/var/lib/mysql
-      - ./db:/docker-entrypoint-initdb.d
+    
+    #ports:
+    #- "127.0.0.1:3306:3306"
 
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
@@ -45,23 +41,29 @@ services:
       timeout: 5s
       retries: 10
 
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./db:/docker-entrypoint-initdb.d
+
     networks:
       - notebook_network
 
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin
+    image: phpmyadmin:latest
     container_name: notebook_phpmyadmin
     restart: unless-stopped
-
-    depends_on:
-      - mysql
-
-    ports:
-      - "8081:80"
 
     environment:
       PMA_HOST: mysql
       PMA_PORT: 3306
+      PMA_ARBITRARY: 0
+
+    ports:
+      - "127.0.0.1:8010:80"
+
+    depends_on:
+      mysql:
+        condition: service_healthy
 
     networks:
       - notebook_network

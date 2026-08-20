@@ -4,19 +4,25 @@ require_once __DIR__ . "/../../config/database.php";
 
 $username = "adminwk";
 
-$password = password_hash("ieadmin", PASSWORD_DEFAULT);
+$password = $_ENV['ADMIN_INITIAL_PASSWORD'] ?? '';
+
+if ($password === '') {
+    die("ADMIN_INITIAL_PASSWORD is not configured");
+}
+
+$password = password_hash($password, PASSWORD_DEFAULT);
 
 $stmt = $conn->prepare("
-INSERT INTO admin
-(
-username,
-password
-)
-VALUES
-(
-?,
-?
-)
+    INSERT INTO admin
+    (
+        username,
+        password
+    )
+    VALUES
+    (
+        ?,
+        ?
+    )
 ");
 
 $stmt->execute([

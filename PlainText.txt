@@ -1,0 +1,449 @@
+🏗️ Notebook Borrow System — Current Architecture
+NotebookBorrowSystem/
+│
+├── .env
+│   ├── DB_HOST=mysql
+│   ├── DB_PORT=3306
+│   ├── DB_USER=root
+│   ├── DB_PASS=********
+│   └── DB_DATABASE=notebook_borrow
+│
+├── docker-compose.yml
+├── Dockerfile
+│
+├── public/
+│   │
+│   ├── index.php
+│   │
+│   ├── login.php
+│   ├── logout.php
+│   │
+│   ├── register.php
+│   ├── register_process.php
+│   │
+│   ├── verify.php
+│   ├── verify_process.php
+│   │
+│   ├── dashboard.php
+│   │
+│   └── assets/
+│       ├── css/
+│       │   └── auth.css
+│       │
+│       └── js/
+│           ├── login.js
+│           ├── register.js
+│           └── verify.js
+│
+├── config/
+│   ├── config.php
+│   └── database.php
+│
+├── includes/
+│   └── auth.php
+│
+├── vendor/
+│   ├── autoload.php
+│   └── phpmailer/
+│       └── phpmailer/
+│
+├── db/
+│   └── notebook_borrow.sql
+│
+├── notebook_borrow_backup.sql
+├── mysql_data_backup.tar.gz
+│
+└── ...
+
+
+🐳 1. Docker Architecture
+ปัจจุบันมี 3 Containers หลัก:
+                         Windows Host
+                    C:\xampp\htdocs\
+                    NotebookBorrowSystem
+                              │
+                              │
+                    Docker Compose Network
+                              │
+             ┌────────────────┼────────────────┐
+             │                │                │
+             ▼                ▼                ▼
+      ┌────────────┐   ┌──────────────┐  ┌─────────────────┐
+      │ notebook_app│   │notebook_mysql│  │notebook_phpmyadmin│
+      │             │   │              │  │                 │
+      │ PHP 8.3     │   │ MySQL 8.0    │  │ phpMyAdmin      │
+      │ Apache      │   │              │  │                 │
+      │             │   │              │  │                 │
+      │ :80         │   │ :3306        │  │ :80             │
+      └──────┬──────┘   └──────┬───────┘  └────────┬────────┘
+             │                 │                   │
+             │                 │                   │
+             │                 │                   │
+      Host :8080          Host :3306          Host :8081
+             │                 │                   │
+             ▼                 ▼                   ▼
+      localhost:8080    localhost:3306      localhost:8081
+สถานะที่ยืนยันแล้ว
+notebook_app
+    ✅ Running
+    ✅ Port 8080
+
+notebook_mysql
+    ✅ Running
+    ✅ Healthy
+    ✅ Port 3306
+
+notebook_phpmyadmin
+    ✅ Running
+    ✅ Port 8081
+🗄️ 2. Docker Volume / MySQL Storage
+ข้อมูล MySQL ไม่ได้เก็บอยู่แค่ใน Container
+Docker Volume
+│
+└── notebookborrowsystem_mysql_data
+          │
+          ▼
+   /var/lib/mysql
+          │
+          ▼
+   notebook_mysql
+          │
+          ▼
+   MySQL 8.0
+          │
+          ▼
+   notebook_borrow
+และมี Backup ที่คุณสร้างไว้:
+NotebookBorrowSystem/
+│
+├── mysql_data_backup.tar.gz
+│   └── Physical MySQL data backup
+│
+└── notebook_borrow_backup.sql
+    └── SQL database backup
+🔌 3. Application → Database
+ปัจจุบันเราแก้กลับมาใช้ root
+PHP Application
+      │
+      │ DB_HOST=mysql
+      │ DB_PORT=3306
+      │ DB_USER=root
+      │ DB_PASS=********
+      │ DB_DATABASE=notebook_borrow
+      ▼
+┌───────────────────┐
+│   notebook_mysql  │
+│                   │
+│   MySQL 8.0       │
+└───────────────────┘
+และเรา ทดสอบจริงแล้ว:
+APP_DB_OK
+notebook_borrow
+ดังนั้นเส้นทางนี้:
+PHP → MySQL → notebook_borrow
+ทำงานแล้ว ✅
+🗃️ 4. Database Structure
+Database ที่ตรวจพบจริง:
+notebook_borrow
+│
+├── admin
+│
+├── email_otp
+│
+├── notebook
+│
+├── transactions
+│
+└── users
+โครงสร้างเชิงระบบ:
+users
+ │
+ │ User account
+ │
+ ├──────────────► email_otp
+ │                  │
+ │                  │ OTP verification
+ │                  ▼
+ │              Email verification
+ │
+ │
+ ▼
+Authentication
+ │
+ ▼
+Login
+ │
+ ▼
+Session
+ │
+ ▼
+Dashboard
+ │
+ ▼
+transactions
+ │
+ ▼
+notebook
+หมายเหตุ: ความสัมพันธ์ Foreign Key ระหว่างตารางแต่ละตัว ผมยังไม่ยืนยันจาก SHOW CREATE TABLE ในรอบนี้ จึงยังไม่วาดเป็น FK แบบฟันธง
+🔐 5. Authentication Flow
+โฟลว์ปัจจุบันที่เราวางไว้:
+                    ┌──────────────┐
+                    │    User      │
+                    └──────┬───────┘
+                           │
+                           ▼
+                    register.php
+                           │
+                           ▼
+                 register_process.php
+                           │
+                           ▼
+                  Validate input
+                           │
+                  ┌────────┴────────┐
+                  │                 │
+                Error              OK
+                  │                 │
+                  ▼                 ▼
+             Show error       Create account
+                                    │
+                                    ▼
+                               Generate OTP
+                                    │
+                                    ▼
+                               Send Email
+                                    │
+                                    ▼
+                                verify.php
+                                    │
+                                    ▼
+                           verify_process.php
+                                    │
+                              Check OTP
+                                    │
+                         ┌──────────┴──────────┐
+                         │                     │
+                       Invalid               Valid
+                         │                     │
+                         ▼                     ▼
+                    Show error          Verify account
+                                               │
+                                               ▼
+                                          Login page
+                                               │
+                                               ▼
+                                          login.php
+                                               │
+                                               ▼
+                                        Authentication
+                                               │
+                                               ▼
+                                           Session
+                                               │
+                                               ▼
+                                         dashboard.php
+📧 6. OTP Flow แบบละเอียด
+register.php
+     │
+     │ User enters:
+     │
+     ├── First Name
+     ├── Last Name
+     ├── Student ID
+     ├── Email local-part
+     ├── Password
+     └── Confirm Password
+     │
+     ▼
+register.js
+     │
+     ├── Client validation
+     │
+     └── AJAX duplicate check
+             │
+             ├── Student ID
+             └── Email
+                    │
+                    ▼
+             register_process.php
+                    │
+                    ▼
+              Create OTP
+                    │
+                    ├──────────────► email_otp
+                    │
+                    ▼
+                  Mail
+                    │
+                    ▼
+             Student's email
+                    │
+                    ▼
+               Enter OTP
+                    │
+                    ▼
+                verify.php
+                    │
+                    ▼
+            verify_process.php
+                    │
+                    ▼
+              Validate OTP
+                    │
+          ┌─────────┴─────────┐
+          │                   │
+       Invalid              Valid
+          │                   │
+          ▼                   ▼
+     Reject OTP          Mark verified
+                              │
+                              ▼
+                           Login
+⏱️ 7. OTP Expiration
+ก่อนหน้านี้เราพบปัญหา:
+created_at
+     │
+     ▼
+expires_at
+ต้องเป็น:
+created_at < expires_at
+ไม่ใช่:
+expires_at < created_at    ❌
+ดังนั้นระบบ OTP ควรมีแนวคิด:
+OTP Created
+     │
+     ▼
+created_at
+     │
+     │   OTP valid period
+     │
+     ▼
+expires_at
+แล้ว verify_process.php ต้องตรวจประมาณ:
+Current Time < expires_at
+จึงจะยอมรับ OTP
+🔑 8. Login Flow
+login.php
+    │
+    │ CMU Email
+    │ Password
+    ▼
+Authentication
+    │
+    ▼
+users
+    │
+    ├── Account exists?
+    │
+    ├── Password correct?
+    │
+    └── Email verified?
+    │
+    ▼
+Session
+    │
+    ▼
+dashboard.php
+Logout:
+dashboard.php
+      │
+      ▼
+logout.php
+      │
+      ▼
+session_destroy()
+      │
+      ▼
+login.php
+🛡️ 9. Session Security
+จากไฟล์ที่เราตรวจพบ:
+config/config.php
+    │
+    ├── session_set_cookie_params()
+    │
+    └── session_start()
+และ:
+includes/auth.php
+    └── session_start()
+รวมถึง:
+public/logout.php
+    └── session_start()
+ดังนั้น Session architecture เป็น:
+Request
+   │
+   ▼
+config.php
+   │
+   ▼
+Session
+   │
+   ├── Authentication state
+   │
+   └── User identity
+   │
+   ▼
+auth.php
+   │
+   ▼
+Protected pages
+🧩 10. ภาพรวมทั้งหมด
+                         USER
+                          │
+             ┌────────────┴────────────┐
+             │                         │
+             ▼                         ▼
+         Register                    Login
+             │                         │
+             ▼                         ▼
+     register.php                 login.php
+             │                         │
+             ▼                         ▼
+   register_process.php          Authentication
+             │                         │
+             ▼                         ▼
+          Generate                 users
+             │                         │
+             ▼                         ▼
+        email_otp                  Session
+             │                         │
+             ▼                         ▼
+           Email                  auth.php
+             │                         │
+             ▼                         ▼
+         verify.php              Dashboard
+             │                         │
+             ▼                         │
+   verify_process.php                  │
+             │                         │
+             └──────────┬──────────────┘
+                        │
+                        ▼
+                  notebook_borrow
+                        │
+          ┌─────────────┼─────────────┐
+          │             │             │
+          ▼             ▼             ▼
+       users         notebook    transactions
+          │                           │
+          └───────────────────────────┘
+
+
+═══════════════════════════════════════════════
+
+                    DOCKER
+                       │
+          ┌────────────┼────────────┐
+          │            │            │
+          ▼            ▼            ▼
+     notebook_app  notebook_mysql  phpMyAdmin
+       :8080          :3306          :8081
+          │            ▲            │
+          │            │            │
+          └────────────┴────────────┘
+                       │
+                       ▼
+                notebook_borrow
+                       │
+                       ▼
+             mysql_data volume
+             

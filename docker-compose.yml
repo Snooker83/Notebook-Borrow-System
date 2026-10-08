@@ -59,7 +59,7 @@ services:
       PMA_ARBITRARY: 0
 
     ports:
-      - "127.0.0.1:8010:80"
+      - "8010:80"
 
     depends_on:
       mysql:

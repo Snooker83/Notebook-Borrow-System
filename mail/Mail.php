@@ -19,7 +19,7 @@ class MailSender
 
         $mail = new PHPMailer(true);
 
-
+        $mail->CharSet = 'UTF-8';
 
         try {
 
@@ -46,7 +46,7 @@ class MailSender
             // Sender
 
             $mail->setFrom(
-                MAIL_USERNAME,
+                MAIL_FROM,
                 MAIL_FROM_NAME
             );
 
@@ -289,12 +289,15 @@ Chiang Mai University
             return true;
         } catch (Exception $e) {
 
+            error_log('OTP mail failed for ' . $email . ': ' . $mail->ErrorInfo);
+            
+            return false;
 
-            echo "Mailer Error: ";
+            // echo "Mailer Error: ";
 
-            echo $mail->ErrorInfo;
+            // echo $mail->ErrorInfo;
 
-            exit;
+            // exit;
         }
     }
 }
